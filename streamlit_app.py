@@ -42,6 +42,8 @@ st.set_page_config(
 )
 
 
+
+
 st.title("Mushrooms CDS24")
 st.sidebar.title("Sommaire")
 add_logo('data/mush.png')

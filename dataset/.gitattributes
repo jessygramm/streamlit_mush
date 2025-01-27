@@ -1,0 +1,13 @@
+Fuligo[[:space:]]septica filter=lfs diff=lfs merge=lfs -text
+Ganoderma[[:space:]]oregonense filter=lfs diff=lfs merge=lfs -text
+Hypomyces[[:space:]]lactifluorum filter=lfs diff=lfs merge=lfs -text
+Pluteus[[:space:]]cervinus filter=lfs diff=lfs merge=lfs -text
+Trametes[[:space:]]versicolor filter=lfs diff=lfs merge=lfs -text
+Amanita[[:space:]]muscaria filter=lfs diff=lfs merge=lfs -text
+Boletus[[:space:]]edulis filter=lfs diff=lfs merge=lfs -text
+Cantharellus[[:space:]]cinnabarinus filter=lfs diff=lfs merge=lfs -text
+Grifola[[:space:]]frondosa filter=lfs diff=lfs merge=lfs -text
+Lactarius[[:space:]]indigo filter=lfs diff=lfs merge=lfs -text
+Artomyces[[:space:]]pyxidatus filter=lfs diff=lfs merge=lfs -text
+Coprinus[[:space:]]comatus filter=lfs diff=lfs merge=lfs -text
+Ganoderma[[:space:]]applanatum filter=lfs diff=lfs merge=lfs -text
