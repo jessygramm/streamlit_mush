@@ -99,7 +99,7 @@ if page == pages[5]:
 
         st.subheader('Gradcam Interpretation', divider = 'gray')
         st.image(grad)
-        with st.expander('Gradcam Explanation', icon = ":bulb:"):
+        with st.expander('Gradcam Explanation', icon = ":material/lightbulb:"):
             st.write('''
             Gradcam is .....
             ''')
