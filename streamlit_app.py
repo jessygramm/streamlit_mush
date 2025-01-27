@@ -142,7 +142,7 @@ if page == pages[5]:
 
         # Print the prediction
         col1,col2,col3 = st.columns([0.1, 4, 0.1])
-        col2.subheader(f"This mushroom is a **{predicted_class_name}**")
+        col2.subheader(f"This mushroom is a :green[**{predicted_class_name}**]")
 
 
         st.subheader('Shap Interpretation')
