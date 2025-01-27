@@ -34,7 +34,7 @@ class_names = {0:"Amanita muscaria",
                 12:"Trametes versicolor"}
 
 
-im = Image.open('/data/mush.png')
+im = Image.open('data/mush.png')
 st.set_page_config(
     page_title="Mush",
     page_icon=im,
