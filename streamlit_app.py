@@ -65,7 +65,7 @@ if page == pages[4]:
     st.write('Modelisation')
 
 if page == pages[5]:
-    st.subheader('Choose a mushroom image : ')
+    st.write('**Choose a mushroom image : **')
 
 
     option = image_select('', [(test_path + 'test1.jpg'), (test_path + 'test2.jpg'), (test_path + 'test3.jpg'), (test_path + 'test4.jpg')])
@@ -97,7 +97,7 @@ if page == pages[5]:
         predicted_class_name = class_names[predicted_class]
         # Print the prediction
         col1, col2, col3 = st.columns([1, 4, 0.1])
-        col2.subheader(f"This mushroom is a :green-backgound[**{predicted_class_name}**]")
+        col2.subheader(f"This mushroom is a :green-background[**{predicted_class_name}**]")
 
         st.subheader('Gradcam Interpretation', divider = 'gray')
         st.image(grad)
