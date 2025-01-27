@@ -46,7 +46,7 @@ st.set_page_config(
 
 st.title("Mushrooms CDS24")
 st.sidebar.title("Summary")
-add_logo('data/mush.png')
+add_logo('data/mush.png', height=300)
 
 pages=["Introduction","Data Gathering","Exploration", "Pre Processing", "Modelisation", "Predict & Interpret","Conclusion"]
 page=st.sidebar.radio("Aller vers", pages)
