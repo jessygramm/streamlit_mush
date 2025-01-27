@@ -96,14 +96,13 @@ if page == pages[5]:
         predicted_class = np.argmax(model_eff.predict(np.array([img])))
         predicted_class_name = class_names[predicted_class]
         # Print the prediction
-        pred = f"This mushroom is a **{predicted_class_name}**"
         col1, col2, col3 = st.columns([1, 4, 0.1])
-        col2.subheader(":green-backgound[pred]")
+        col2.subheader(f"This mushroom is a :green-backgound[**{predicted_class_name}**]")
 
-        st.subheader('Gradcam Interpretation')
+        st.subheader('Gradcam Interpretation', divider = 'gray')
         st.image(grad)
 
-        st.subheader('Shap Interpretation')
+        st.subheader('Shap Interpretation', divider = 'gray')
         col1, col2, col3 = st.columns([0.1, 4, 0.1])
         col2.image(sh, use_column_width=True)
 
@@ -144,13 +143,13 @@ if page == pages[5]:
 
         # Print the prediction
         col1,col2,col3 = st.columns([1, 4, 0.1])
-        col2.subheader(f"This mushroom is a :green[**{predicted_class_name}**]")
+        col2.subheader(f"This mushroom is a :green-background[**{predicted_class_name}**]")
 
 
-        st.subheader('Shap Interpretation')
+        st.subheader('Shap Interpretation', divider = 'gray')
         st.image(sha)
 
-        st.subheader('Captum Interpretation')
+        st.subheader('Captum Interpretation', divider = 'gray')
         st.image(cap)
 
 
