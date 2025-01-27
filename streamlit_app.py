@@ -97,7 +97,8 @@ if page == pages[5]:
         predicted_class_name = class_names[predicted_class]
         # Print the prediction
         col1, col2, col3 = st.columns([1, 4, 0.1])
-        col2.subheader(f"This mushroom is a :green[**{predicted_class_name}**]")
+        tutu = col2.subheader(f"This mushroom is a :green[**{predicted_class_name}**]")
+        st.text_area('',tutu)
 
         st.subheader('Gradcam Interpretation')
         st.image(grad)
