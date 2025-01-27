@@ -108,7 +108,7 @@ if page == pages[5]:
         col1, col2, col3 = st.columns([0.1, 4, 0.1])
         col2.image(sh, use_column_width=True)
 
-    if right.button("Transformer Model", icon = ":hug:", use_container_width=True):
+    if right.button("Transformer Model", use_container_width=True):
         def prediction(option):
             if option == (test_path + 'test.png'):
                 sha = pred_path + 'vit_test1_shap.png'
