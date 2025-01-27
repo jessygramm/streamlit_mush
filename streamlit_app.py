@@ -108,6 +108,10 @@ if page == pages[5]:
         st.subheader('Shap Interpretation', divider = 'gray')
         col1, col2, col3 = st.columns([0.1, 4, 0.1])
         col2.image(sh, use_column_width=True)
+        with st.expander('Shap Explanation', icon = ":material/lightbulb:"):
+            st.write('''
+            Shap is .....
+            ''')
 
     if right.button("Transformer Model :hugging_face: ", use_container_width=True):
         def prediction(option):
@@ -152,9 +156,21 @@ if page == pages[5]:
 
         st.subheader('Shap Interpretation', divider = 'gray')
         st.image(sha)
+        with st.expander('Shap Explanation', icon = ":material/lightbulb:"):
+            st.write('''
+            Shap applies game theory to break down complex model predictions into contributions from each pixel. It
+            calculates Shapley values, which represent the average contribution of each feature to the prediction, 
+            considering all possible feature subsets. This is done by approximating the prediction for every possible 
+            combination of features, enabling the explanation of how individual pixels or regions in an image influence the 
+            output. SHAP provides both local and global interpretability.
+            ''')
 
         st.subheader('Captum Interpretation', divider = 'gray')
         st.image(cap)
+        with st.expander('Captum Explanation', icon = ":material/lightbulb:"):
+            st.write('''
+            Captum is .....
+            ''')
 
 
 
