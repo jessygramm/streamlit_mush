@@ -4,6 +4,7 @@ numpy~=1.26.4
 matplotlib~=3.9.2
 seaborn~=0.13.2
 torch
+keras
 torchvision~=0.18.1
 transformers~=4.48.1
 shap~=0.46.0
