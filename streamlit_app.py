@@ -14,10 +14,10 @@ from streamlit_extras.app_logo import add_logo
 import streamlit_image_select
 from streamlit_image_select import image_select
 
-test_path = '/test/'
-pred_path = '/imag_pred/'
-model_path = '/model/'
-data_path = '/data/'
+test_path = 'test/'
+pred_path = 'imag_pred/'
+model_path = 'model/'
+data_path = 'data/'
 
 class_names = {0:"Amanita muscaria",
                 1:"Artomyces pyxidatus",
@@ -44,7 +44,7 @@ st.set_page_config(
 
 st.title("Mushrooms CDS24")
 st.sidebar.title("Sommaire")
-add_logo(im)
+add_logo('data/mush.png')
 
 pages=["Introduction","Récolte des données","Exploration", "Pre Processing", "Modélisation", "Interprétabilité EfficientNet","Interprétabilité ViT", "Conclusion"]
 page=st.sidebar.radio("Aller vers", pages)
