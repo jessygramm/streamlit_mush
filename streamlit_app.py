@@ -45,10 +45,10 @@ st.set_page_config(
 
 
 st.title("Mushrooms CDS24")
-st.sidebar.title("Sommaire")
+st.sidebar.title("Summary")
 add_logo('data/mush.png')
 
-pages=["Introduction","Récolte des données","Exploration", "Pre Processing", "Modélisation", "Interprétabilité EfficientNet","Interprétabilité ViT", "Conclusion"]
+pages=["Introduction","Data Gathering","Exploration", "Pre Processing", "Modelisation", "Predict & Interpret","Conclusion"]
 page=st.sidebar.radio("Aller vers", pages)
 
 if page == pages[0]:
@@ -56,7 +56,7 @@ if page == pages[0]:
     st.image(im)
 
 if page == pages[1]:
-    st.write('Récolte des données')
+    st.write('Sata Gathering')
 
 if page == pages[2]:
     st.write('Exploration')
@@ -65,16 +65,16 @@ if page == pages[3]:
     st.write('Pre Processing')
 
 if page == pages[4]:
-    st.write('Modélisation')
+    st.write('Modelisation')
 
 if page == pages[5]:
-    st.write('Interpretabilité EfficientNet')
+    st.write('Mushroom prediction')
 
 
-    option = image_select('Choisissez une image de champignon pour connaitre son éspèce :', [(test_path + 'test.png'), (test_path + 'test2.jpg'), (test_path + 'test3.jpg'), (test_path + 'test4.jpg')])
+    option = image_select('Choose a mushroom image :', [(test_path + 'test.png'), (test_path + 'test2.jpg'), (test_path + 'test3.jpg'), (test_path + 'test4.jpg')])
     img = Image.open(option).resize((224, 224)).convert('RGB')
     col1, col2, col3 = st.columns([3,2,3])
-    col2.image(img, use_column_width=True, caption='Image à prédire')
+    col2.image(img, use_column_width=True, caption='Image to predict')
 
     left, right = st.columns(2)
     if left.button("EfficientNet Model", use_container_width=True):
@@ -99,7 +99,7 @@ if page == pages[5]:
         predicted_class = np.argmax(model_eff.predict(np.array([img])))
         predicted_class_name = class_names[predicted_class]
         # Print the prediction
-        st.write(f"Ce champignon est de l'éspèce {predicted_class_name}")
+        st.write(f"This mushroom is a {predicted_class_name}")
 
         st.subheader('Gradcam Interpretation')
         st.image(grad)
@@ -144,7 +144,7 @@ if page == pages[5]:
         predicted_class_name = class_names[predicted_class_index]
 
         # Print the prediction
-        st.write(f"Ce champignon est de l'éspèce {predicted_class_name} ")
+        st.write(f"This mushroom is a {predicted_class_name} ")
 
         st.subheader('Shap Interpretation')
         st.image(sha)
@@ -153,59 +153,7 @@ if page == pages[5]:
         st.image(cap)
 
 
+
+
 if page == pages[6]:
-    st.header('Interprétabilité ViT')
-
-    option_vit = image_select('Choisissez une image de champignon pour connaitre son éspèce :',
-                              [(test_path + 'test.png'), (test_path + 'test2.jpg'), (test_path + 'test3.jpg'),
-                               (test_path + 'test4.jpg')])
-    img_vit = Image.open(option_vit).resize((224, 224)).convert('RGB')
-    col1, col2, col3 = st.columns([3, 2, 3])
-    col2.image(img_vit, use_column_width=True, caption='Image à prédire')
-
-    def prediction(option_vit):
-        if option_vit == (test_path + 'test.png'):
-            sha = pred_path +'vit_test1_shap.png'
-            cap = pred_path +'vit_test1_captum.png'
-        elif option_vit == (test_path + 'test2.jpg'):
-            sha = pred_path +'vit_test2_shap.png'
-            cap = pred_path +'vit_test2_captum.png'
-        elif option_vit == (test_path + 'test3.jpg'):
-            sha = pred_path +'vit_test3_shap.png'
-            cap = pred_path +'vit_test3_captum.png'
-        elif option_vit == (test_path + 'test4.jpg'):
-            sha = pred_path +'vit_test4_shap.png'
-            cap = pred_path +'vit_test4_captum.png'
-        return sha, cap
-
-    #Load model
-    model_save_path = os.path.join(model_path, "vit_model")
-    feature_extractor = transformers.ViTFeatureExtractor.from_pretrained(model_save_path)
-    model_vit = transformers.ViTForImageClassification.from_pretrained(model_save_path)
-    sha, cap = prediction(option_vit)
-
-
-    # Preprocess the image
-    inputs = feature_extractor(images=img_vit, return_tensors="pt")
-
-    with torch.no_grad():
-        outputs = model_vit(**inputs)
-        logits = outputs.logits
-
-    predicted_class_index = logits.argmax(-1).item()
-
-    # Get the predicted class label
-    predicted_class_label = class_names[predicted_class_index]
-    predicted_class_name = class_names[predicted_class_index]
-
-    # Print the prediction
-    st.write(f"Ce champignon est de l'éspèce {predicted_class_name} ")
-
-    st.subheader('Shap Interpretation')
-    st.image(sha)
-
-    st.subheader('Captum Interpretation')
-    st.image(cap)
-
-if page == pages[7]:
     st.write('Conclusion')
