@@ -49,14 +49,14 @@ st.sidebar.title("Summary")
 add_logo('data/mush.png', height=300)
 
 pages=["Introduction","Data Gathering","Exploration", "Pre Processing", "Modelisation", "Predict & Interpret","Conclusion"]
-page=st.sidebar.radio("Aller vers", pages)
+page=st.sidebar.button(pages)
 
 if page == pages[0]:
     st.write('Introduction')
     st.image(im)
 
 if page == pages[1]:
-    st.write('Sata Gathering')
+    st.write('Data Gathering')
 
 if page == pages[2]:
     st.write('Exploration')
