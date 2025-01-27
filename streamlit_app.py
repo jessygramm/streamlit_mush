@@ -79,7 +79,7 @@ if page == pages[5]:
     left, right = st.columns(2)
     if left.button("EfficientNet Model", use_container_width=True):
         def prediction(option):
-            if option == (test_path + 'test.png'):
+            if option == (test_path + 'test1.jpg'):
                 grad = pred_path + 'eff_test1_gradcam.png'
                 sh = pred_path + 'eff_test1_shap.png'
             elif option == (test_path + 'test2.jpg'):
@@ -110,7 +110,7 @@ if page == pages[5]:
 
     if right.button("Transformer Model :hugging_face: ", use_container_width=True):
         def prediction(option):
-            if option == (test_path + 'test.png'):
+            if option == (test_path + 'test1.jpg'):
                 sha = pred_path + 'vit_test1_shap.png'
                 cap = pred_path + 'vit_test1_captum.png'
             elif option == (test_path + 'test2.jpg'):
