@@ -67,7 +67,7 @@ if page == pages[4]:
     st.write('Modelisation')
 
 if page == pages[5]:
-    st.write('Mushroom prediction')
+    st.subheader('Choose a mushroom image ')
 
 
     option = image_select('Choose a mushroom image :', [(test_path + 'test.png'), (test_path + 'test2.jpg'), (test_path + 'test3.jpg'), (test_path + 'test4.jpg')])
