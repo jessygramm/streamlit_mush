@@ -65,7 +65,7 @@ if page == pages[4]:
 
 if page == pages[5]:
 
-    option = image_select("*Choose a mushroom image :", [(test_path + 'test1.jpg'), (test_path + 'test2.jpg'), (test_path + 'test3.jpg'), (test_path + 'test4.jpg')])
+    option = image_select("Choose a mushroom image :", [(test_path + 'test1.jpg'), (test_path + 'test2.jpg'), (test_path + 'test3.jpg'), (test_path + 'test4.jpg')])
     img = Image.open(option).resize((224, 224)).convert('RGB')
     col1, col2, col3 = st.columns([3,2,3])
     col2.image(img, use_column_width=True, caption='Image to predict')
@@ -93,8 +93,9 @@ if page == pages[5]:
         predicted_class = np.argmax(model_eff.predict(np.array([img])))
         predicted_class_name = class_names[predicted_class]
         # Print the prediction
-        col1, col2, col3 = st.columns([1, 4, 0.1])
-        col2.subheader(f"This mushroom is a :green-background[**{predicted_class_name}**]")
+        with st.container():
+            col1, col2, col3 = st.columns([1, 4, 0.1])
+            col2.subheader(f"This mushroom is a :green-background[**{predicted_class_name}**]")
 
         st.subheader('Gradcam Interpretation', divider = 'gray')
         st.image(grad)
