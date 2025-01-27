@@ -9,7 +9,6 @@ import torch
 #import keras
 import tensorflow as tf
 import streamlit_extras
-import streamlit_image_viewer
 from streamlit_image_viewer import image_viewer
 from streamlit_extras.app_logo import add_logo
 import streamlit_image_select
