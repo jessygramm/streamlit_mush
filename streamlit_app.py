@@ -41,9 +41,6 @@ st.set_page_config(
     layout="wide",
 )
 
-
-
-col1, col2, col3 = st.columns([2, 4, 0.1])
 st.title(":mushroom: Mushroom Prediction :mushroom:")
 
 st.sidebar.image('data/mush.png', width=200)
@@ -99,7 +96,7 @@ if page == pages[5]:
         predicted_class = np.argmax(model_eff.predict(np.array([img])))
         predicted_class_name = class_names[predicted_class]
         # Print the prediction
-        st.write(f"This mushroom is a {predicted_class_name}")
+        st.text_area(f"This mushroom is a {predicted_class_name}")
 
         st.subheader('Gradcam Interpretation')
         st.image(grad)
@@ -144,7 +141,7 @@ if page == pages[5]:
         predicted_class_name = class_names[predicted_class_index]
 
         # Print the prediction
-        st.write(f"This mushroom is a {predicted_class_name} ")
+        st.text_area(f"This mushroom is a {predicted_class_name} ")
 
         st.subheader('Shap Interpretation')
         st.image(sha)
