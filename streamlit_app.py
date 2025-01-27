@@ -96,8 +96,9 @@ if page == pages[5]:
         predicted_class = np.argmax(model_eff.predict(np.array([img])))
         predicted_class_name = class_names[predicted_class]
         # Print the prediction
+        pred = f"This mushroom is a **{predicted_class_name}**"
         col1, col2, col3 = st.columns([1, 4, 0.1])
-        col2.subheader(f":green-backgound[This mushroom is a **{predicted_class_name}**]")
+        col2.subheader(f":green-backgound[pred]")
 
         st.subheader('Gradcam Interpretation')
         st.image(grad)
