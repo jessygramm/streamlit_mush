@@ -96,7 +96,7 @@ if page == pages[5]:
         predicted_class = np.argmax(model_eff.predict(np.array([img])))
         predicted_class_name = class_names[predicted_class]
         # Print the prediction
-        st.text_area(f"This mushroom is a {predicted_class_name}")
+        st.text_area('',f"This mushroom is a **{predicted_class_name}**")
 
         st.subheader('Gradcam Interpretation')
         st.image(grad)
@@ -141,7 +141,7 @@ if page == pages[5]:
         predicted_class_name = class_names[predicted_class_index]
 
         # Print the prediction
-        st.text_area(f"This mushroom is a {predicted_class_name} ")
+        st.text_area('',f"This mushroom is a **{predicted_class_name}** ")
 
         st.subheader('Shap Interpretation')
         st.image(sha)
