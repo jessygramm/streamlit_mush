@@ -43,10 +43,10 @@ st.set_page_config(
 
 
 
-col1, col2, col3 = st.columns([0.1, 4, 0.1])
+col1, col2, col3 = st.columns([1, 4, 0.1])
 col2.title(":mushroom: Mushroom Prediction :mushroom:")
 
-st.sidebar.image('data/mush.png')
+st.sidebar.image('data/mush.png', width=50)
 
 pages=["Introduction","Data Gathering","Exploration", "Pre Processing", "Modelisation", "Predict & Interpret","Conclusion"]
 page=st.sidebar.radio("Go to",pages)
