@@ -141,8 +141,8 @@ if page == pages[5]:
         predicted_class_name = class_names[predicted_class_index]
 
         # Print the prediction
-        md = st.markdown(f"**This mushroom is a {predicted_class_name}**")
-        st.text_area(md)
+        st.markdown('<span style="font-size: 24px;">f"This mushroom is a **{predicted_class_name}**"</span>', unsafe_allow_html=True))
+        st.text_area(f"This mushroom is a **{predicted_class_name}**")
 
 
         st.subheader('Shap Interpretation')
