@@ -141,7 +141,7 @@ if page == pages[5]:
         predicted_class_name = class_names[predicted_class_index]
 
         # Print the prediction
-        col1,col2,col3 = st.columns(3)
+        col1,col2,col3 = st.columns([0.1, 4, 0.1])
         col2.subheader(f"This mushroom is a **{predicted_class_name}**" )
 
 
