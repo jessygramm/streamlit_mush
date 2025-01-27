@@ -141,7 +141,7 @@ if page == pages[5]:
         predicted_class_name = class_names[predicted_class_index]
 
         # Print the prediction
-        st.text_area('bold',f"This mushroom is a {predicted_class_name}")
+        st.caption(f"This mushroom is a {predicted_class_name}")
 
         st.subheader('Shap Interpretation')
         st.image(sha)
