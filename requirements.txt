@@ -5,6 +5,8 @@ matplotlib~=3.9.2
 seaborn~=0.13.2
 torch
 keras
+tensorflow
+streamlit-extras
 torchvision~=0.18.1
 transformers~=4.48.1
 shap~=0.46.0
