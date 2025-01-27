@@ -50,7 +50,6 @@ page=st.sidebar.radio("Go to",pages)
 
 if page == pages[0]:
     st.write('Introduction')
-    st.image(im)
 
 if page == pages[1]:
     st.write('Data Gathering')
