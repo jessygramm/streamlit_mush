@@ -45,11 +45,10 @@ st.set_page_config(
 
 
 st.title("Mushrooms CDS24")
-st.sidebar.title("Summary")
 st.sidebar.image('data/mush.png')
 
 pages=["Introduction","Data Gathering","Exploration", "Pre Processing", "Modelisation", "Predict & Interpret","Conclusion"]
-page=st.sidebar.button("Go to",pages)
+page=st.sidebar.radio("Go to",pages)
 
 if page == pages[0]:
     st.write('Introduction')
