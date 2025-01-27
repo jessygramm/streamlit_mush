@@ -43,10 +43,10 @@ st.set_page_config(
 
 
 
-col1, col2, col3 = st.columns([1, 4, 0.1])
+col1, col2, col3 = st.columns([2, 4, 0.1])
 col2.title(":mushroom: Mushroom Prediction :mushroom:")
 
-st.sidebar.image('data/mush.png', width=50)
+st.sidebar.image('data/mush.png', width=200
 
 pages=["Introduction","Data Gathering","Exploration", "Pre Processing", "Modelisation", "Predict & Interpret","Conclusion"]
 page=st.sidebar.radio("Go to",pages)
@@ -68,7 +68,7 @@ if page == pages[4]:
     st.write('Modelisation')
 
 if page == pages[5]:
-    st.subheader('Choose a mushroom image ')
+    st.subheader('Choose a mushroom image : ')
 
 
     option = image_select('', [(test_path + 'test.png'), (test_path + 'test2.jpg'), (test_path + 'test3.jpg'), (test_path + 'test4.jpg')])
