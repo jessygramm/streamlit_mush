@@ -8,6 +8,29 @@ from PIL import Image
 import torch
 import keras
 import tensorflow as tf
+import streamlit_extras
+import streamlit_image_viewer
+from streamlit_image_viewer import image_viewer
+from streamlit_extras.app_logo import add_logo
+import streamlit_image_select
+from streamlit_image_select import image_select
+
+test_path = '/home/jess/PycharmProjects/streamlit_mush/test/'
+pred_path = '/home/jess/PycharmProjects/streamlit_mush/imag_pred/'
+model_path = '/home/jess/PycharmProjects/streamlit_mush/model/'
+class_names = {0:"Amanita muscaria",
+                1:"Artomyces pyxidatus",
+                2:"Boletus edulis",
+                3:"Cantharellus cinnabarinus",
+                4:"Coprinus comatus",
+                5:"Fuligo septica",
+                6:"Ganoderma applanatum",
+                7:"Ganoderma oregonense",
+                8:"Grifola frondosa",
+                9:"Hypomyces lactifluorum",
+                10:"Lactarius indigo",
+                11:"Pluteus cervinus",
+                12:"Trametes versicolor"}
 
 
 im = Image.open('/home/jess/Pictures/Screenshots/mush.png')
@@ -20,6 +43,8 @@ st.set_page_config(
 
 st.title("Mushrooms CDS24")
 st.sidebar.title("Sommaire")
+add_logo('/home/jess/Pictures/Screenshots/mush.png')
+
 pages=["Introduction","Récolte des données","Exploration", "Pre Processing", "Modélisation", "Interprétabilité EfficientNet","Interprétabilité ViT", "Conclusion"]
 page=st.sidebar.radio("Aller vers", pages)
 
@@ -43,92 +68,78 @@ if page == pages[4]:
 if page == pages[5]:
     st.write('Interpretabilité EfficientNet')
 
-    st.subheader('Prédiction de la classe d\'une image')
 
-    # Choix de l'image à prédire
-    choix_eff = ['Image 1', 'Image 2', 'Image 3', 'Image 4']
-    option_eff = st.selectbox('Choix de l\'image', choix_eff)
-    st.write('L\'image choisie est : ', option_eff)
+    option_eff = image_select('Choisissez une image de champignon pour connaitre son éspèce :', [(test_path + 'test.png'), (test_path + 'test2.jpg'), (test_path + 'test3.jpg'), (test_path + 'test4.jpg')])
+    img_eff = Image.open(option_eff).resize((224, 224)).convert('RGB')
+    col1, col2, col3 = st.columns([3,2,3])
+    col2.image(img_eff, use_column_width=True, caption='Image à prédire')
 
 
     def prediction(option_eff):
-        if option_eff == 'Image 1':
-            img = 'test.png'
-            grad = '/home/jess/PycharmProjects/streamlit_mush/imag_pred/eff_test1_gradcam.png'
-            sh = '/home/jess/PycharmProjects/streamlit_mush/imag_pred/eff_test1_shap.png'
-        elif option_eff == 'Image 2':
-            img = 'test2.jpg'
-            grad = '/home/jess/PycharmProjects/streamlit_mush/imag_pred/eff_test2_gradcam.png'
-            sh = '/home/jess/PycharmProjects/streamlit_mush/imag_pred/eff_test2_shap.png'
-        elif option_eff == 'Image 3':
-            img = 'test3.jpg'
-            grad = '/home/jess/PycharmProjects/streamlit_mush/imag_pred/eff_test3_gradcam.png'
-            sh = '/home/jess/PycharmProjects/streamlit_mush/imag_pred/eff_test3_shap.png'
-        elif option_eff == 'Image 4':
-            img = 'test4.jpg'
-            grad = '/home/jess/PycharmProjects/streamlit_mush/imag_pred/eff_test3_gradcam.png'
-            sh = '/home/jess/PycharmProjects/streamlit_mush/imag_pred/eff_test3_shap.png'
-        return img, grad, sh
+        if option_eff == (test_path + 'test.png'):
+            grad = pred_path + 'eff_test1_gradcam.png'
+            sh = pred_path + 'eff_test1_shap.png'
+        elif option_eff == (test_path + 'test2.jpg'):
+            grad = pred_path + 'eff_test2_gradcam.png'
+            sh = pred_path + 'eff_test2_shap.png'
+        elif option_eff == (test_path + 'test3.jpg'):
+            grad = pred_path + 'eff_test3_gradcam.png'
+            sh = pred_path + 'eff_test3_shap.png'
+        elif option_eff == (test_path + 'test4.jpg'):
+            grad = pred_path + 'eff_test4_gradcam.png'
+            sh = pred_path + 'eff_test4_shap.png'
+        return grad, sh
 
-    model_eff = tf.keras.models.load_model('/home/jess/PycharmProjects/streamlit_mush/model/tuned_efficientnet_model.keras')
-    img, grad, sh = prediction(option_eff)
-    image_path = '/home/jess/PycharmProjects/streamlit_mush/test/' + img
-    image = Image.open(image_path).resize((224, 224)).convert('RGB')
+    model_eff = tf.keras.models.load_model(model_path + 'tuned_efficientnet_model.keras')
+    grad, sh = prediction(option_eff)
 
-    predicted_class = np.argmax(model_eff.predict(np.array([image])))
-    class_names = sorted(os.listdir('/home/jess/PycharmProjects/streamlit_mush/dataset'))
+    predicted_class = np.argmax(model_eff.predict(np.array([img_eff])))
     predicted_class_name = class_names[predicted_class]
-    st.image(image)
     # Print the prediction
-    st.write(f"Predicted class: {predicted_class_name}")
+    st.write(f"Ce champignon est de l'éspèce {predicted_class_name}")
 
     st.subheader('Gradcam Interpretation')
     st.image(grad)
 
     st.subheader('Shap Interpretation')
-    st.image(sh)
-
+    col1, col2, col3 = st.columns([0.1, 4, 0.1])
+    col2.image(sh, use_column_width=True)
 
 
 if page == pages[6]:
     st.header('Interprétabilité ViT')
-    st.subheader('Prédiction de la classe d\'une image')
 
-    # Choix de l'image à prédire
-    choix_vit = ['Image 1', 'Image 2', 'Image 3', 'Image 4']
-    option_vit = st.selectbox('Choix de l\'image', choix_vit)
-    st.write('L\'image choisie est : ', option_vit)
+    option_vit = image_select('Choisissez une image de champignon pour connaitre son éspèce :',
+                              [(test_path + 'test.png'), (test_path + 'test2.jpg'), (test_path + 'test3.jpg'),
+                               (test_path + 'test4.jpg')])
+    img_vit = Image.open(option_vit).resize((224, 224)).convert('RGB')
+    col1, col2, col3 = st.columns([3, 2, 3])
+    col2.image(img_vit, use_column_width=True, caption='Image à prédire')
 
     def prediction(option_vit):
-        if option_vit == 'Image 1':
-            img = 'test.png'
-            sha = '/home/jess/PycharmProjects/streamlit_mush/imag_pred/vit_test1_shap.png'
-            cap = '/home/jess/PycharmProjects/streamlit_mush/imag_pred/vit_test1_captum.png'
-        elif option_vit == 'Image 2':
-            img = 'test2.jpg'
-            sha = '/home/jess/PycharmProjects/streamlit_mush/imag_pred/vit_test2_shap.png'
-            cap = '/home/jess/PycharmProjects/streamlit_mush/imag_pred/vit_test2_captum.png'
-        elif option_vit == 'Image 3':
-            img = 'test3.jpg'
-            sha = '/home/jess/PycharmProjects/streamlit_mush/imag_pred/vit_test3_shap.png'
-            cap = '/home/jess/PycharmProjects/streamlit_mush/imag_pred/vit_test3_captum.png'
-        elif option_vit == 'Image 4':
-            img = 'test4.jpg'
-            sha = '/home/jess/PycharmProjects/streamlit_mush/imag_pred/vit_test4_shap.png'
-            cap = '/home/jess/PycharmProjects/streamlit_mush/imag_pred/vit_test4_captum.png'
-        return img, sha, cap
+        if option_vit == (test_path + 'test.png'):
+            sha = pred_path +'vit_test1_shap.png'
+            cap = pred_path +'vit_test1_captum.png'
+        elif option_vit == (test_path + 'test2.jpg'):
+            sha = pred_path +'vit_test2_shap.png'
+            cap = pred_path +'vit_test2_captum.png'
+        elif option_vit == (test_path + 'test3.jpg'):
+            sha = pred_path +'vit_test3_shap.png'
+            cap = pred_path +'vit_test3_captum.png'
+        elif option_vit == (test_path + 'test4.jpg'):
+            sha = pred_path +'vit_test4_shap.png'
+            cap = pred_path +'vit_test4_captum.png'
+        return sha, cap
 
-    save_path = '/home/jess/PycharmProjects/streamlit_mush/model'
-    model_save_path = os.path.join(save_path, "vit_model")
-
+    #Load model
+    model_save_path = os.path.join(model_path, "vit_model")
     feature_extractor = transformers.ViTFeatureExtractor.from_pretrained(model_save_path)
     model_vit = transformers.ViTForImageClassification.from_pretrained(model_save_path)
-    img, sha, cap = prediction(option_vit)
-    image_path = '/home/jess/PycharmProjects/streamlit_mush/test/' + img
-    image = Image.open(image_path).resize((224, 224)).convert('RGB')
+    sha, cap = prediction(option_vit)
+
 
     # Preprocess the image
-    inputs = feature_extractor(images=image, return_tensors="pt")
+    inputs = feature_extractor(images=img_vit, return_tensors="pt")
 
     with torch.no_grad():
         outputs = model_vit(**inputs)
@@ -137,12 +148,11 @@ if page == pages[6]:
     predicted_class_index = logits.argmax(-1).item()
 
     # Get the predicted class label
-    class_names = sorted(os.listdir('/home/jess/PycharmProjects/streamlit_mush/dataset'))
     predicted_class_label = class_names[predicted_class_index]
     predicted_class_name = class_names[predicted_class_index]
-    st.image(image)
+
     # Print the prediction
-    st.write(f"Predicted class: {predicted_class_name} ")
+    st.write(f"Ce champignon est de l'éspèce {predicted_class_name} ")
 
     st.subheader('Shap Interpretation')
     st.image(sha)
