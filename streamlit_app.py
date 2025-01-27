@@ -64,10 +64,8 @@ if page == pages[4]:
     st.write('Modelisation')
 
 if page == pages[5]:
-    st.markdown("**Choose a mushroom image : **")
 
-
-    option = image_select("**Choose a mushroom image : **", [(test_path + 'test1.jpg'), (test_path + 'test2.jpg'), (test_path + 'test3.jpg'), (test_path + 'test4.jpg')])
+    option = image_select("*Choose a mushroom image :", [(test_path + 'test1.jpg'), (test_path + 'test2.jpg'), (test_path + 'test3.jpg'), (test_path + 'test4.jpg')])
     img = Image.open(option).resize((224, 224)).convert('RGB')
     col1, col2, col3 = st.columns([3,2,3])
     col2.image(img, use_column_width=True, caption='Image to predict')
