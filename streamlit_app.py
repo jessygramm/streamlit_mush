@@ -141,7 +141,7 @@ if page == pages[5]:
         predicted_class_name = class_names[predicted_class_index]
 
         # Print the prediction
-        st.markdown(f"**This mushroom is a {predicted_class_name}**")
+        md = st.markdown(f"**This mushroom is a {predicted_class_name}**")
         st.text_area(md)
 
 
