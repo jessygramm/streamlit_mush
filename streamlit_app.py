@@ -44,7 +44,7 @@ st.set_page_config(
 
 
 col1, col2, col3 = st.columns([2, 4, 0.1])
-col2.title(":mushroom: Mushroom Prediction :mushroom:")
+st.title(":mushroom: Mushroom Prediction :mushroom:")
 
 st.sidebar.image('data/mush.png', width=200)
 
