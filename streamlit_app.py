@@ -64,7 +64,7 @@ if page == pages[4]:
     st.write('Modelisation')
 
 if page == pages[5]:
-    st.write('**Choose a mushroom image : **')
+    st.markdown('**Choose a mushroom image : **')
 
 
     option = image_select('', [(test_path + 'test1.jpg'), (test_path + 'test2.jpg'), (test_path + 'test3.jpg'), (test_path + 'test4.jpg')])
