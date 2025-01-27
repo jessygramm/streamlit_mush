@@ -99,6 +99,11 @@ if page == pages[5]:
 
         st.subheader('Gradcam Interpretation', divider = 'gray')
         st.image(grad)
+        with st.expander('Gradcam Explanation', icon = ":bulb:"):
+            st.write('''
+            Gradcam is .....
+            ''')
+
 
         st.subheader('Shap Interpretation', divider = 'gray')
         col1, col2, col3 = st.columns([0.1, 4, 0.1])
