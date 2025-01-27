@@ -101,16 +101,24 @@ if page == pages[5]:
         st.image(grad)
         with st.expander('Gradcam Explanation', icon = ":material/lightbulb:"):
             st.write('''
-            Gradcam is .....
+            Gradcam is a technique for visualizing the regions of an input image that contribute most to a deep learning model's 
+            prediction. It uses the gradients of the target class with respect to the final convolutional layer’s feature maps 
+            to generate a weighted heatmap, highlighting important areas of the image. Grad-CAM produces a coarse localization 
+            map that shows which regions are most influential for the classification decision. This method is especially useful 
+            for convolutional neural networks, providing insights into model behavior by revealing spatial patterns associated 
+            with predictions.
             ''')
-
 
         st.subheader('Shap Interpretation', divider = 'gray')
         col1, col2, col3 = st.columns([0.1, 4, 0.1])
         col2.image(sh, use_column_width=True)
         with st.expander('Shap Explanation', icon = ":material/lightbulb:"):
             st.write('''
-            Shap is .....
+            Shap applies game theory to break down complex model predictions into contributions from each pixel. It
+            calculates Shapley values, which represent the average contribution of each feature to the prediction, 
+            considering all possible feature subsets. This is done by approximating the prediction for every possible 
+            combination of features, enabling the explanation of how individual pixels or regions in an image influence the 
+            output. SHAP provides both local and global interpretability.
             ''')
 
     if right.button("Transformer Model :hugging_face: ", use_container_width=True):
@@ -169,7 +177,10 @@ if page == pages[5]:
         st.image(cap)
         with st.expander('Captum Explanation', icon = ":material/lightbulb:"):
             st.write('''
-            Captum is .....
+            Captum is a model interpretability library that provides a suite of attribution algorithms for understanding and 
+            visualizing model predictions. It includes methods like Integrated Gradients, Layer Conductance, and Saliency, 
+            which attribute the importance of each input pixel to the model’s output. Captum works by computing gradients or 
+            other relevance scores to highlight which parts of the input were most influential.
             ''')
 
 
