@@ -14,9 +14,11 @@ from streamlit_extras.app_logo import add_logo
 import streamlit_image_select
 from streamlit_image_select import image_select
 
-test_path = '/home/jess/PycharmProjects/streamlit_mush/test/'
-pred_path = '/home/jess/PycharmProjects/streamlit_mush/imag_pred/'
-model_path = '/home/jess/PycharmProjects/streamlit_mush/model/'
+test_path = '/test/'
+pred_path = '/imag_pred/'
+model_path = '/model/'
+data_path = '/data/'
+
 class_names = {0:"Amanita muscaria",
                 1:"Artomyces pyxidatus",
                 2:"Boletus edulis",
@@ -32,7 +34,7 @@ class_names = {0:"Amanita muscaria",
                 12:"Trametes versicolor"}
 
 
-im = Image.open('/home/jess/Pictures/Screenshots/mush.png')
+im = Image.open('/data/mush.png')
 st.set_page_config(
     page_title="Mush",
     page_icon=im,
@@ -42,15 +44,14 @@ st.set_page_config(
 
 st.title("Mushrooms CDS24")
 st.sidebar.title("Sommaire")
-add_logo('/home/jess/Pictures/Screenshots/mush.png')
+add_logo(im)
 
 pages=["Introduction","Récolte des données","Exploration", "Pre Processing", "Modélisation", "Interprétabilité EfficientNet","Interprétabilité ViT", "Conclusion"]
 page=st.sidebar.radio("Aller vers", pages)
 
 if page == pages[0]:
     st.write('Introduction')
-    cover = '/home/jess/Pictures/Screenshots/mush.png'
-    st.image(cover)
+    st.image(im)
 
 if page == pages[1]:
     st.write('Récolte des données')
