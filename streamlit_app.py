@@ -33,7 +33,7 @@ class_names = {0:"Amanita muscaria",
                 11:"Pluteus cervinus",
                 12:"Trametes versicolor"}
 
-
+#Set favicon & title
 im = Image.open('data/mush.png')
 st.set_page_config(
     page_title="Mush",
@@ -71,41 +71,86 @@ if page == pages[5]:
     st.write('Interpretabilité EfficientNet')
 
 
-    option_eff = image_select('Choisissez une image de champignon pour connaitre son éspèce :', [(test_path + 'test.png'), (test_path + 'test2.jpg'), (test_path + 'test3.jpg'), (test_path + 'test4.jpg')])
-    img_eff = Image.open(option_eff).resize((224, 224)).convert('RGB')
+    option = image_select('Choisissez une image de champignon pour connaitre son éspèce :', [(test_path + 'test.png'), (test_path + 'test2.jpg'), (test_path + 'test3.jpg'), (test_path + 'test4.jpg')])
+    img = Image.open(option).resize((224, 224)).convert('RGB')
     col1, col2, col3 = st.columns([3,2,3])
-    col2.image(img_eff, use_column_width=True, caption='Image à prédire')
+    col2.image(img, use_column_width=True, caption='Image à prédire')
 
+    left, right = st.columns(2)
+    if left.button("EfficientNet Model", use_container_width=True):
+        def prediction(option):
+            if option == (test_path + 'test.png'):
+                grad = pred_path + 'eff_test1_gradcam.png'
+                sh = pred_path + 'eff_test1_shap.png'
+            elif option == (test_path + 'test2.jpg'):
+                grad = pred_path + 'eff_test2_gradcam.png'
+                sh = pred_path + 'eff_test2_shap.png'
+            elif option == (test_path + 'test3.jpg'):
+                grad = pred_path + 'eff_test3_gradcam.png'
+                sh = pred_path + 'eff_test3_shap.png'
+            elif option == (test_path + 'test4.jpg'):
+                grad = pred_path + 'eff_test4_gradcam.png'
+                sh = pred_path + 'eff_test4_shap.png'
+            return grad, sh
 
-    def prediction(option_eff):
-        if option_eff == (test_path + 'test.png'):
-            grad = pred_path + 'eff_test1_gradcam.png'
-            sh = pred_path + 'eff_test1_shap.png'
-        elif option_eff == (test_path + 'test2.jpg'):
-            grad = pred_path + 'eff_test2_gradcam.png'
-            sh = pred_path + 'eff_test2_shap.png'
-        elif option_eff == (test_path + 'test3.jpg'):
-            grad = pred_path + 'eff_test3_gradcam.png'
-            sh = pred_path + 'eff_test3_shap.png'
-        elif option_eff == (test_path + 'test4.jpg'):
-            grad = pred_path + 'eff_test4_gradcam.png'
-            sh = pred_path + 'eff_test4_shap.png'
-        return grad, sh
+        model_eff = tf.keras.models.load_model(model_path + 'tuned_efficientnet_model.keras')
+        grad, sh = prediction(option)
 
-    model_eff = tf.keras.models.load_model(model_path + 'tuned_efficientnet_model.keras')
-    grad, sh = prediction(option_eff)
+        predicted_class = np.argmax(model_eff.predict(np.array([img])))
+        predicted_class_name = class_names[predicted_class]
+        # Print the prediction
+        st.write(f"Ce champignon est de l'éspèce {predicted_class_name}")
 
-    predicted_class = np.argmax(model_eff.predict(np.array([img_eff])))
-    predicted_class_name = class_names[predicted_class]
-    # Print the prediction
-    st.write(f"Ce champignon est de l'éspèce {predicted_class_name}")
+        st.subheader('Gradcam Interpretation')
+        st.image(grad)
 
-    st.subheader('Gradcam Interpretation')
-    st.image(grad)
+        st.subheader('Shap Interpretation')
+        col1, col2, col3 = st.columns([0.1, 4, 0.1])
+        col2.image(sh, use_column_width=True)
 
-    st.subheader('Shap Interpretation')
-    col1, col2, col3 = st.columns([0.1, 4, 0.1])
-    col2.image(sh, use_column_width=True)
+    if right.button("Transformer Model", icon = ":hug:", use_container_width=True):
+        def prediction(option):
+            if option == (test_path + 'test.png'):
+                sha = pred_path + 'vit_test1_shap.png'
+                cap = pred_path + 'vit_test1_captum.png'
+            elif option == (test_path + 'test2.jpg'):
+                sha = pred_path + 'vit_test2_shap.png'
+                cap = pred_path + 'vit_test2_captum.png'
+            elif option == (test_path + 'test3.jpg'):
+                sha = pred_path + 'vit_test3_shap.png'
+                cap = pred_path + 'vit_test3_captum.png'
+            elif option == (test_path + 'test4.jpg'):
+                sha = pred_path + 'vit_test4_shap.png'
+                cap = pred_path + 'vit_test4_captum.png'
+            return sha, cap
+
+        # Load model
+        model_save_path = os.path.join(model_path, "vit_model")
+        feature_extractor = transformers.ViTFeatureExtractor.from_pretrained(model_save_path)
+        model_vit = transformers.ViTForImageClassification.from_pretrained(model_save_path)
+        sha, cap = prediction(option)
+
+        # Preprocess the image
+        inputs = feature_extractor(images=img, return_tensors="pt")
+
+        with torch.no_grad():
+            outputs = model_vit(**inputs)
+            logits = outputs.logits
+
+        predicted_class_index = logits.argmax(-1).item()
+
+        # Get the predicted class label
+        predicted_class_label = class_names[predicted_class_index]
+        predicted_class_name = class_names[predicted_class_index]
+
+        # Print the prediction
+        st.write(f"Ce champignon est de l'éspèce {predicted_class_name} ")
+
+        st.subheader('Shap Interpretation')
+        st.image(sha)
+
+        st.subheader('Captum Interpretation')
+        st.image(cap)
 
 
 if page == pages[6]:
