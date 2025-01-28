@@ -67,7 +67,8 @@ if page == pages[4]:
         "F1 score train": [0.98, 0.98, 0.99, 0.94, 1.0],
         "F1 score test": [0.89, 0.91, 0.93, None, 0.95]
     })
-    st.dataframe(results)
+    results.set_index("Model", inplace = True)
+    st.dataframe(results.style.highlight_max(axis=0))
 
 if page == pages[5]:
 
