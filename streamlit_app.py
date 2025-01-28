@@ -61,15 +61,29 @@ if page == pages[3]:
     st.write('Pre Processing')
 
 if page == pages[4]:
-    st.write('Modelisation')
+    st.write('We created and trained several models to achieve the most reliable results possible. '
+             'For some, we built them from scratch, while for others, we used transfer learning techniques. '
+             ''
+             'Here is a summary of the results obtained.:')
     results = pd.DataFrame({
         "Model": ["CNN", "MobileNet", "EfficientNetB3", "YoloV8l", "VIT"],
         "F1 score train": [0.98, 0.98, 0.99, 0.94, 1.0],
-        "F1 score test": [0.89, 0.91, 0.93, None, 0.95]
+        "F1 score test": [0.89, 0.91, 0.93, 0.90, 0.95]
     })
     results.set_index("Model", inplace = True)
     results = results.sort_values('F1 score test', ascending=True)
     st.dataframe(results.style.highlight_max(axis=0), use_container_width=True)
+
+    tab1, tab2, tab3 = st.tabs(['CNN', 'EfficientNet', 'Vision Transformer'])
+    with tab1:
+        st.header('ConvNet')
+        st.write('What we did ...')
+    with tab2:
+        st.header('EfficientNet')
+        st.write('What we did ...')
+    with tab3 :
+        st.header('Vision Transformer')
+        st.write('What we did ...')
 
 if page == pages[5]:
 
