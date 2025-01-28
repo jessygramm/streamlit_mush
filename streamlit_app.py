@@ -62,9 +62,8 @@ if page == pages[3]:
 
 if page == pages[4]:
     st.write('We created and trained several models to achieve the most reliable results possible. '
-             'For some, we built them from scratch, while for others, we used transfer learning techniques. '
-             ''
-             'Here is a summary of the results obtained.:')
+             'For some, we built them from scratch, while for others, we used transfer learning techniques. ')
+    st.write('Here is a summary of the results obtained.:')
     results = pd.DataFrame({
         "Model": ["CNN", "MobileNet", "EfficientNetB3", "YoloV8l", "VIT"],
         "F1 score train": [0.98, 0.98, 0.99, 0.94, 1.0],
@@ -73,6 +72,9 @@ if page == pages[4]:
     results.set_index("Model", inplace = True)
     results = results.sort_values('F1 score test', ascending=True)
     st.dataframe(results.style.highlight_max(axis=0), use_container_width=True)
+
+    st.write('Below you can find details on three models used in this project')
+    st.write(':bulb: Note that you can test EfficientNet and Transformer on the next page!')
 
     tab1, tab2, tab3 = st.tabs(['CNN', 'EfficientNet', 'Vision Transformer'])
     with tab1:
