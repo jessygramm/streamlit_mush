@@ -160,7 +160,7 @@ if page == pages[5]:
         # Print the prediction
         with st.container(border = True):
             col1, col2, col3 = st.columns([1, 4, 0.1])
-            col2.subheader(f"This mushroom is a :green-background[**{predicted_class_name}**]")
+            col2.subheader(f"This mushroom is a :green[**{predicted_class_name}**]")
 
         st.subheader('Gradcam Interpretation', divider = 'gray')
         st.image(grad)
@@ -224,7 +224,7 @@ if page == pages[5]:
         # Print the prediction
         with st.container(border=True):
             col1,col2,col3 = st.columns([1, 4, 0.1])
-            col2.subheader(f"This mushroom is a :green-background[**{predicted_class_name}**]")
+            col2.subheader(f"This mushroom is a :green[**{predicted_class_name}**]")
 
 
         st.subheader('Shap Interpretation', divider = 'gray')
