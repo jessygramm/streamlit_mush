@@ -116,14 +116,14 @@ if page == pages[4]:
     with tab3 :
         st.header('Vision Transformer')
         st.markdown("""
-        he Vision Transformer (ViT) is a deep learning model designed for image classification and other computer vision tasks. 
+        The Vision Transformer (ViT) is a deep learning model designed for image classification and other computer vision tasks. 
         It applies the transformer architecture, originally developed for natural language processing, to image data. Images are 
         split into fixed-size patches, which are flattened and embedded before being processed by transformer layers. ViT leverages 
         self-attention mechanisms to capture global relationships between image patches, achieving state-of-the-art performance, 
         especially when trained on large datasets.
         
         The training process we used : 
-        - Load the 'google/vit-base-patch16-224-in21k' model from :hugging_face: Hugging Face
+        - Load the 'google/vit-base-patch16-224-in21k' model from Hugging Face :hugging_face:
         - Train it on our datas
         - Test it
         """)
