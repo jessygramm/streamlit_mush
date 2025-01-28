@@ -62,6 +62,12 @@ if page == pages[3]:
 
 if page == pages[4]:
     st.write('Modelisation')
+    results = pd.DataFrame({
+        "Model": ["CNN", "MobileNet", "EfficientNetB3", "YoloV8l", "VIT"],
+        "F1 score train": [0.98, 0.98, 0.99, 0.94, 1.0],
+        "F1 score test": [0.89, 0.91, 0.93, None, 0.95]
+    })
+    st.dataframe(results)
 
 if page == pages[5]:
 
@@ -182,9 +188,6 @@ if page == pages[5]:
             which attribute the importance of each input pixel to the model’s output. Captum works by computing gradients or 
             other relevance scores to highlight which parts of the input were most influential.
             ''')
-
-
-
 
 if page == pages[6]:
     st.write('Conclusion')
