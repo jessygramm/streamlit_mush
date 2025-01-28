@@ -79,13 +79,54 @@ if page == pages[4]:
     tab1, tab2, tab3 = st.tabs(['CNN', 'EfficientNet', 'Vision Transformer'])
     with tab1:
         st.header('ConvNet')
-        st.write('What we did ...')
+        st.markdown(
+            """
+            A Convolutional Neural Network uses convolutional layers to automatically detect patterns such as edges, 
+            textures, or shapes in images, progressively learning more complex features in deeper layers. These features 
+            are passed through pooling layers to reduce spatial dimensions and then through fully connected layers for final 
+            classification.
+            
+            The training process we used : 
+            - Instanciate a MLFlow experiment to track the results
+            - Start with 'keras_tuner' to help choose hyperparameters
+            - Adjusts hyperparameters
+            - Random search
+            - Test regulation methods to reduce overfitting
+            - Modify dataset to deal with class imbalance
+            - Retrain and reajust parameters
+            """
+        )
     with tab2:
         st.header('EfficientNet')
-        st.write('What we did ...')
+        st.markdown(
+            """
+            EfficientNet is a family of convolutional neural networks designed for image classification and other vision tasks. 
+            It uses a compound scaling method to efficiently balance network depth, width, and resolution, achieving high performance 
+            while reducing computational cost. EfficientNet models are lightweight and scalable, making them suitable for 
+            resource-constrained environments while delivering state-of-the-art accuracy in image-related tasks.
+            
+            The training process we used : 
+            - Import the EfficientNetB7 model with 'imagenet' weights
+            - Add some layers and softmax at the end for classification
+            - Compile the model
+            - Train it on our data
+            - Fine tuning            
+            """
+        )
     with tab3 :
         st.header('Vision Transformer')
-        st.write('What we did ...')
+        st.markdown("""
+        he Vision Transformer (ViT) is a deep learning model designed for image classification and other computer vision tasks. 
+        It applies the transformer architecture, originally developed for natural language processing, to image data. Images are 
+        split into fixed-size patches, which are flattened and embedded before being processed by transformer layers. ViT leverages 
+        self-attention mechanisms to capture global relationships between image patches, achieving state-of-the-art performance, 
+        especially when trained on large datasets.
+        
+        The training process we used : 
+        - Load the 'google/vit-base-patch16-224-in21k' model from :hugging_face: Hugging Face
+        - Train it on our datas
+        - Test it
+        """)
 
 if page == pages[5]:
 
