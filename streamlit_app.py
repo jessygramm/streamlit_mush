@@ -69,7 +69,7 @@ if page == pages[4]:
     })
     results.set_index("Model", inplace = True)
     results = results.sort_values('F1 score test', ascending=True)
-    st.dataframe(results.style.highlight_max(axis=0))
+    st.dataframe(results.style.highlight_max(axis=0), use_container_width=True)
 
 if page == pages[5]:
 
