@@ -49,7 +49,35 @@ pages=["Introduction","Data Gathering","Exploration", "Pre Processing", "Modelis
 page=st.sidebar.radio("Go to",pages)
 
 if page == pages[0]:
-    st.write('Introduction')
+
+    st.markdown("""
+                    As part of the avr24_cds_mushrooms project, we immerse you in the world of **mushrooms.** :herbe: These mysterious forest dwellers are fascinating.
+                    Their diversity is astounding, ranging from tiny spores invisible to the naked eye to majestic boletes and amanitas.
+                    In the kitchen :ramen: mushrooms are treasures of flavors and textures, adding an irresistible touch to many dishes.
+                    Additionally, some mushrooms have medicinal properties recognized for millennia, used in both traditional and modern medicine.
+                    **However, mushroom picking requires in-depth knowledge, as some species are toxic, even deadly.
+                    This is why mushroom recognition is a valuable skill.**
+                    Combining technical expertise and business interpretation, the goal of this project is to develop a mushroom recognition system using computer vision
+                    algorithms. For training the models, we primarily used data from the [Mushroom Observer](https://mushroomobserver.org/).
+                    A rich and collaborative resource aimed at expanding the community of mycology enthusiasts.
+                    The data and images are freely available on the site and are regularly enriched by the community.
+                    **Below are the main steps of this adventure :**
+                    - Understanding the project and the concepts underneath
+                    - Exploring the available data
+                    - Collecting the image
+                    - Preprocessing them (labelling, segmentation, data augmentation,...)
+                    - Modeling and training algorithms
+                    - Measurement and interpretability
+                    """
+                )
+    with st.expander('About Team', icon=":material/lightbulb:"):
+        st.write('''
+                         - Jessica Gerstein
+                         - Brice Oulion
+                         - Napo Koh-Mama
+                         - Gaël Ahihounkpe
+                         '''
+                 )
 
 if page == pages[1]:
     st.write('Data Gathering')
@@ -249,4 +277,20 @@ if page == pages[5]:
             ''')
 
 if page == pages[6]:
-    st.write('Conclusion')
+
+    st.markdown("""
+                    This project allowed us to deeply explore the application of deep learning algorithms in the fascinating field of mushrooms.
+                    At each stage, we faced complex challenges, from data collection and processing to model interpretation,
+                    while emphasizing the importance of methodical approaches in data science.
+                    In terms of modeling, we optimized several deep learning architectures. The results obtained show satisfactory performance.
+                    Although our results are encouraging, it would be interesting to explore other avenues for improvement and expansion of our
+                    mushroom classification system:
+                    - Explore optimized variants of ViT such as DeiT (Data-efficient Image Transformers) or CvT (Convolutional vision Transformer),
+                    which could potentially outperform the standard ViT.
+                    - Explore hybrid architectures with models combining the strengths of CNNs and Transformers, like CoAtNet.
+                    - Develop few-shot models capable of learning from very few examples, which would be useful for identifying new mushroom species.
+                    This work highlights the importance of combining technical expertise and business interpretation.
+                    They provide a solid foundation for future research or industrial applications in fields such as biodiversity or mycology,
+                    coded on drone videos for example...
+                    """)
+    st.markdown("![Alt Text](https://i.pinimg.com/originals/65/d4/a3/65d4a33521f6f15d4b8f3b5cdeaec29d.gif)")
