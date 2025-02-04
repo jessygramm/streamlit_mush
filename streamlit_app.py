@@ -55,12 +55,18 @@ if page == pages[0]:
                     Their diversity is astounding, ranging from tiny spores invisible to the naked eye to majestic boletes and amanitas.
                     In the kitchen :ramen: mushrooms are treasures of flavors and textures, adding an irresistible touch to many dishes.
                     Additionally, some mushrooms have medicinal properties recognized for millennia, used in both traditional and modern medicine.
+                    
+                    
                     **However, mushroom picking requires in-depth knowledge, as some species are toxic, even deadly.
                     This is why mushroom recognition is a valuable skill.**
+                    
+                    
                     Combining technical expertise and business interpretation, the goal of this project is to develop a mushroom recognition system using computer vision
                     algorithms. For training the models, we primarily used data from the [Mushroom Observer](https://mushroomobserver.org/).
                     A rich and collaborative resource aimed at expanding the community of mycology enthusiasts.
                     The data and images are freely available on the site and are regularly enriched by the community.
+                    
+                    
                     **Below are the main steps of this adventure :**
                     - Understanding the project and the concepts underneath
                     - Exploring the available data
