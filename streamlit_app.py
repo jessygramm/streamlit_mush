@@ -51,6 +51,8 @@ page=st.sidebar.radio("Go to",pages)
 if page == pages[0]:
 
     st.markdown("""
+                   
+                   
                     As part of the avr24_cds_mushrooms project, we immerse you in the world of **mushrooms.** :herb: These mysterious forest dwellers are fascinating.
                     Their diversity is astounding, ranging from tiny spores invisible to the naked eye to majestic boletes and amanitas.
                     In the kitchen :ramen: mushrooms are treasures of flavors and textures, adding an irresistible touch to many dishes.
@@ -285,6 +287,8 @@ if page == pages[5]:
 if page == pages[6]:
 
     st.markdown("""
+                    
+                    
                     This project allowed us to deeply explore the application of deep learning algorithms in the fascinating field of mushrooms.
                     At each stage, we faced complex challenges, from data collection and processing to model interpretation,
                     while emphasizing the importance of methodical approaches in data science.
