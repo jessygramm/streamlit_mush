@@ -288,6 +288,8 @@ if page == pages[6]:
                     This project allowed us to deeply explore the application of deep learning algorithms in the fascinating field of mushrooms.
                     At each stage, we faced complex challenges, from data collection and processing to model interpretation,
                     while emphasizing the importance of methodical approaches in data science.
+                    
+                    
                     In terms of modeling, we optimized several deep learning architectures. The results obtained show satisfactory performance.
                     Although our results are encouraging, it would be interesting to explore other avenues for improvement and expansion of our
                     mushroom classification system:
@@ -295,6 +297,8 @@ if page == pages[6]:
                     which could potentially outperform the standard ViT.
                     - Explore hybrid architectures with models combining the strengths of CNNs and Transformers, like CoAtNet.
                     - Develop few-shot models capable of learning from very few examples, which would be useful for identifying new mushroom species.
+                    
+                    
                     This work highlights the importance of combining technical expertise and business interpretation.
                     They provide a solid foundation for future research or industrial applications in fields such as biodiversity or mycology,
                     coded on drone videos for example...
