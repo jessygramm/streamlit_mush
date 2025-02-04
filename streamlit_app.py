@@ -51,7 +51,7 @@ page=st.sidebar.radio("Go to",pages)
 if page == pages[0]:
 
     st.markdown("""
-                    As part of the avr24_cds_mushrooms project, we immerse you in the world of **mushrooms.** :grass: These mysterious forest dwellers are fascinating.
+                    As part of the avr24_cds_mushrooms project, we immerse you in the world of **mushrooms.** :herb: These mysterious forest dwellers are fascinating.
                     Their diversity is astounding, ranging from tiny spores invisible to the naked eye to majestic boletes and amanitas.
                     In the kitchen :ramen: mushrooms are treasures of flavors and textures, adding an irresistible touch to many dishes.
                     Additionally, some mushrooms have medicinal properties recognized for millennia, used in both traditional and modern medicine.
