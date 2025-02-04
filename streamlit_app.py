@@ -110,7 +110,7 @@ if page == pages[4]:
     st.dataframe(results.style.highlight_max(axis=0), use_container_width=True)
 
     st.write('Below you can find details on three models used in this project')
-    st.write(':bulb: Note that you can test EfficientNet and Transformer on the next page!')
+    st.write(':bulb: Note that you can test EfficientNet and Transformer models on the next page!')
 
     tab1, tab2, tab3 = st.tabs(['CNN', 'EfficientNet', 'Vision Transformer'])
     with tab1:
