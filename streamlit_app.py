@@ -70,7 +70,7 @@ if page == pages[0]:
                     - Measurement and interpretability
                     """
                 )
-    with st.expander('About Team', icon=":material/lightbulb:"):
+    with st.expander('About the team', icon=":material/lightbulb:"):
         st.write('''
                          - Jessica Gerstein
                          - Brice Oulion
