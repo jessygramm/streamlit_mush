@@ -6,6 +6,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from PIL import Image
 import torch
+import time
 #import keras
 import tensorflow as tf
 import streamlit_extras
@@ -18,6 +19,7 @@ test_path = 'test/'
 pred_path = 'imag_pred/'
 model_path = 'model/'
 data_path = 'data/'
+dg_path = 'img_datagathering/'
 
 class_names = {0:"Amanita muscaria",
                 1:"Artomyces pyxidatus",
@@ -88,7 +90,303 @@ if page == pages[0]:
                  )
 
 if page == pages[1]:
-    st.write('Data Gathering')
+
+    imageMOL = Image.open(dg_path + "MObsv_logo.png")
+    imagepbs = Image.open(dg_path + "pybs4.png")
+    imageINT = Image.open(dg_path + "international.jpeg")
+    imagePAR = Image.open(dg_path + "participatif.jpeg")
+    imagearr = Image.open(dg_path + "arrow.png")
+    image0 = Image.open(dg_path + "website.jpg")
+    image1 = Image.open(dg_path + "website1.png")
+    image2 = Image.open(dg_path + "website2.png")
+    image3 = Image.open(dg_path + "website3.png")
+    image4 = Image.open(dg_path + "website4.png")
+    flvl1 = Image.open(dg_path + "flvl1.png")
+    flvl2 = Image.open(dg_path + "flvl2.png")
+    flvl3 = Image.open(dg_path + "flvl3.png")
+    flvl4 = Image.open(dg_path + "flvl4.png")
+    flvl5 = Image.open(dg_path + "flvl5.png")
+    slvl = Image.open(dg_path + "slvl.png")
+    slvl1 = Image.open(dg_path + "slvl1.png")
+    slvl2 = Image.open(dg_path + "slvl2.png")
+    slvl3 = Image.open(dg_path + "slvl3.png")
+
+    st.write("   ")
+    st.write("   ")    
+    st.write("   ")
+
+    st.markdown("""<h1 style='text-align: center; text-decoration: underline;'>Data Gathering</h1>""", unsafe_allow_html=True)
+
+    st.markdown("""<h2 style='text-align: center;'>Where Did We Get the Data?</h2>""", unsafe_allow_html=True)
+
+    st.markdown("""<div style="text-align: justify;">
+        The first step was to collect a large dataset on mushrooms to train our deeplearning 
+        models effectively. We needed images with correctly identified species names.
+        We decided to use MushroomObserver.org, a collaborative American platform where users 
+        worldwide contribute to mushroom identification.<div>
+        """,unsafe_allow_html=True)
+
+    st.write("   ")
+    st.write("   ")
+    st.write("   ")    
+
+    with st.expander("Website", expanded=True):
+
+        st.markdown("<h4 style='text-align: center;'> More Details on MushroomObserver.org</h4>", unsafe_allow_html=True)
+
+        st.write("   ")
+
+        W, col1, X, col2, Y, col3, Z = st.columns([1,2,1,2,1,2,1])
+        
+        col2.image(imageINT)
+        col1.image(imageMOL)
+        col3.image(imagePAR)
+
+        st.write("   ")
+
+        X, col1, col2, col3, col4, col5 = st.columns([1,3,3,3,3,4])
+
+        col1.metric("Countries worldwide", "152")
+        col2.metric("Identified specie", "1,873")
+        col3.metric("Active contributors", "+ 13,000")
+        col4.metric("Observations", "≃ 530,000")
+        col5.metric("Images", "≃ 1,725,000")
+
+    st.write("   ")
+    st.markdown("""<h2 style='text-align: center;'>What is the structure of the website?</h2>""", unsafe_allow_html=True)
+
+    if "animation1_start" not in st.session_state:
+        st.session_state.animation1_start = False
+    if "view1_img" not in st.session_state:
+        st.session_state.view1_img = False
+
+    with st.expander("Structure", expanded=True):
+
+        colW, col1, colX, col2, colY, col3, colZ = st.columns([1,1,1,1,1,1,1])
+
+        if col1.button("Start"):
+            st.session_state.view1_img = False
+            st.session_state.animation1_start = True
+        if col2.button("Freeze"):
+            st.session_state.animation1_start = False
+            st.session_state.view1_img = True
+        if col3.button("Hide"):
+            st.session_state.animation1_start = False
+            st.session_state.view1_img = False
+
+        st.write("   ") 
+
+        X, col1, Y, col2, Z = st.columns([1,9,1,4,1])
+        image_container1 = col1.empty()
+
+        if st.session_state.animation1_start:
+            col2.metric("Mushrooms / page", "12")
+            col2.metric("Total Pages", "44,000")
+            col2.markdown("""<div style="text-align: justify;"> 
+                Instead of retrieving the entire site, which would have been too time-consuming, we 
+                prioritized the most reliable identifications, sorting pages by their confidence degree.<div>
+                """, unsafe_allow_html=True)
+
+            for _ in range(1000):
+                image_container1.image(image1, use_column_width=True)
+                time.sleep(1)
+                image_container1.image(image2, use_column_width=True)
+                time.sleep(1)
+                image_container1.image(image3, use_column_width=True)
+                time.sleep(0.5)
+                image_container1.image(image4, use_column_width=True)
+                time.sleep(1)
+
+                if not st.session_state.animation1_start:
+                    break
+
+            image_container1.empty()
+            col2.empty()
+
+        elif st.session_state.view1_img:
+            col2.metric("Mushrooms / page", "12")
+            col2.metric("Total Pages", "44,000")
+            col2.markdown("""<div style="text-align: justify;"> 
+                Instead of retrieving the entire site, which would have been too time-consuming, we 
+                prioritized the most reliable identifications, sorting pages by their confidence scores.<div>
+                """, unsafe_allow_html=True)
+
+            image_container1.image(image0, use_column_width=True)
+
+        elif not st.session_state.animation1_start and not st.session_state.view1_img:
+            image_container1.empty()
+            col2.empty()
+
+    st.write("   ")
+    st.markdown("""<h2 style='text-align: center;'>What do we need?</h2>""", unsafe_allow_html=True)
+
+
+
+    if "animation2_start" not in st.session_state:
+        st.session_state.animation2_start = False
+    if "animation3_start" not in st.session_state:
+        st.session_state.animation3_start = False
+    if "view2_img" not in st.session_state:
+        st.session_state.view2_img = False
+
+    with st.expander("Data of interest", expanded=True):
+
+        st.markdown("<h4 style='text-align: center;'>Some data hide in 2 levels</h4>", unsafe_allow_html=True)
+
+        V, col1, W, col2, X, col3, Y, col4, Z = st.columns([1,1,1,1,1,1,1,1,1])
+
+        if col1.button("1st level"):
+            st.session_state.animation2_start = True
+            st.session_state.animation3_start = False
+            st.session_state.view2_img = False
+        if col2.button("2nd level"):
+            st.session_state.animation3_start = True
+            st.session_state.animation2_start = False
+            st.session_state.view2_img = False
+        if col3.button("Overview"):
+            st.session_state.animation2_start = False
+            st.session_state.animation3_start = False
+            st.session_state.view2_img = True
+        if col4.button("Hide "):
+            st.session_state.animation2_start = False
+            st.session_state.animation3_start = False
+            st.session_state.view2_img = False
+
+        if st.session_state.animation2_start:
+
+            Y, col5, Z = st.columns([1,5,1,])
+            image_container = col5.empty()
+
+            for _ in range(1000):
+                image_container.image(flvl1, use_column_width=True)
+                time.sleep(0.3)
+                image_container.image(flvl2, use_column_width=True)
+                time.sleep(0.3)
+                image_container.image(flvl3, use_column_width=True)
+                time.sleep(0.3)
+                image_container.image(flvl4, use_column_width=True)
+                time.sleep(0.3)
+                image_container.image(flvl5, use_column_width=True)
+                time.sleep(3)
+                if not st.session_state.animation2_start:
+                    break
+            image_container.empty()
+
+        elif st.session_state.animation3_start:
+
+            Y, col6, Z = st.columns([1,18,1,])
+            image_container = col6.empty()
+
+            for _ in range(1000):
+                image_container.image(slvl, use_column_width=True)
+                time.sleep(0.3)
+                image_container.image(slvl1, use_column_width=True)
+                time.sleep(0.3)
+                image_container.image(slvl2, use_column_width=True)
+                time.sleep(0.3)
+                image_container.image(slvl3, use_column_width=True)
+                time.sleep(3)
+                if not st.session_state.animation3_start:
+                    break
+            image_container.empty()
+
+        elif st.session_state.view2_img:
+            col7, Z, col8 = st.columns([33.3,1,44])
+            with col7:
+                st.image(flvl5, use_column_width=True)
+            with col8:
+                st.image(slvl3, use_column_width=True)
+
+    col1, col2= st.columns(2)
+    
+    col1.markdown("""<h3 style='text-align: center;'>In the main page : level 1</h3>""", unsafe_allow_html=True)
+    col2.markdown("""<h3 style='text-align: center;'>In observation page : level 2</h3>""", unsafe_allow_html=True)
+
+    X, col1, Y, col2, Z = st.columns(5)
+    col1.markdown("""
+    - observation ID 
+    - species name
+    - date
+    - location""")
+    col2.markdown("""
+    - images IDs
+    - precise location
+    - confidence degree""")
+
+    col2.markdown("""<div style='text-align: center;'>(🔒 Confidence degrees were only 
+    accessible after logging into a user account)<div>""", unsafe_allow_html=True)
+
+    st.write("   ")
+    st.markdown("""<h2 style='text-align: center;'> How did we get it?</h2>""", unsafe_allow_html=True)
+    st.write("   ")
+    st.write("   ")
+
+    U, col1, V, col2, W, col3, X, col4, Y, col5, Z = st.columns([0.4,3,0.6,1,0.4,2,0.1,1,0.4,5,0.4])
+
+    col2.write("   ")
+    col2.write("   ")
+    col3.write("   ")
+    col4.write("   ")
+    col4.write("   ")
+    col5.write("   ")
+    col2.write("   ")
+    col3.write("   ")
+    col4.write("   ")
+    col5.write("   ")
+    col3.write("   ")
+    col5.write("   ")
+
+    col1.image(imagepbs, use_column_width=True)
+    col2.image(imagearr, use_column_width=True)
+    col3.markdown("""<h3 style='text-align: center; text-decoration: bold;'>RUN</h3>""", unsafe_allow_html=True)
+    col4.image(imagearr, use_column_width=True)
+    col5.markdown("""<h3 style='text-align: center; text-decoration: underline;'>mushroom_raw_data.csv</h3>""", unsafe_allow_html=True)
+
+    st.write("   ")
+    st.markdown("""<h3 style='text-align: center;'>Ethical considerations</h3>""", unsafe_allow_html=True)
+
+    st.write("<div style='text-align: center;'>To ensure ethical and responsible scraping, we added delays between"
+        "requests to avoid overloading the site and interfering with other users.<div>", unsafe_allow_html=True)
+    st.write("<div style='text-align: center;'>We also implemented 10-minute breaks every hour to prevent bans and reduce server strain.<div>", unsafe_allow_html=True)
+    st.markdown("""<h3 style='text-align: center;'> </h3>""", unsafe_allow_html=True)
+
+    st.markdown("""<h2 style='text-align: center;'>Short overview of the data collected</h2>""", unsafe_allow_html=True)
+    col1, col2, col3, col4 = st.columns(4)
+    col1.metric("Total Pages Scraped", "16,000")
+    col2.metric("Total Identifications", "192,000")
+    col3.metric("Confidence Score Range", "98% - 70%")
+    col4.metric("Id of potential images","588,000")
+
+    st.markdown("""<h3 style='text-align: center;'> </h3>""", unsafe_allow_html=True)
+
+    st.markdown("""<h2 style='text-align: center;'>Extracted Mushroom Data</h2>""", unsafe_allow_html=True)
+    st.write("   ")
+
+    mushroom_data = pd.DataFrame({
+        "Image IDs": [
+            "183600;183601", "183604;183605", "183606;183607", "183610;183611;183612;183613", "183615;183614"
+        ],
+        "Title": [
+            "Leccinum manzanitae", "Chroogomphus ochraceus", "Boletus eastwoodiae", "Armillaria", "Morganella pyriformis"
+        ],
+        "Location": [
+            "USA, California", "USA, California", "USA, California", "USA, California", "USA, California"
+        ],
+        "Date": [
+            "2011-11-20", "2011-11-20", "2011-11-20", "2011-11-20", "2011-11-20"
+        ],
+        "Latitude": [
+            37.83294, 37.83294, 37.83294, 37.83294, 37.83294
+        ],
+        "Longitude": [
+            -122.16564, -122.16564, -122.16564, -122.16564, -122.16564
+        ],
+        "Confidence Score": [
+            "85%", "85%", "85%", "85%", "80%"
+        ]
+    }, index=[82884, 82886, 82887, 82889, 82890])
+
+    st.dataframe(mushroom_data)
 
 if page == pages[2]:
     st.write('Exploration')
