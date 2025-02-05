@@ -51,8 +51,8 @@ def load_dataset():
 # load df
 df = load_dataset()
 
-#st.title(":mushroom: Mushroom Prediction :mushroom:")
-st.markdown("<h4 style='text-align: center;'> :mushroom: Mushroom Prediction :mushroom:</h4>", unsafe_allow_html=True)
+st.title(":mushroom: Mushroom Prediction :mushroom:")
+
 
 st.sidebar.image('data/mush.png', width=200)
 
