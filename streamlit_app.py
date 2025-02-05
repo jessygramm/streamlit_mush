@@ -389,7 +389,105 @@ if page == pages[1]:
     st.dataframe(mushroom_data)
 
 if page == pages[2]:
-    st.write('Exploration')
+
+    st.write('We started by exploring the dataset to understand its structure and characteristics. '
+             'We examined the distribution of features, and the characteristics of the images. '
+             'This initial exploration helped us identify areas for improvement and guide our data preprocessing efforts.')
+
+
+    # Cache the data processing functions
+    @st.cache_data
+    def process_species_data(df):
+        species_df = df[df['species'].str.split().str.len() > 1]
+        species_with_images = species_df[species_df['image_ids'].notna()]
+        return species_with_images
+
+
+    @st.cache_data
+    def get_country_data():
+        df = pd.read_csv('data/filtered_mushroom_dataset.csv')
+        df['country'] = df['location'].str.split(',').str[0]
+        df = df[df['species'] != 'Mixed collection']
+        return df
+
+
+    @st.cache_data
+    def create_species_plot(species_with_images):
+        top_species = species_with_images['species'].value_counts().head(50)
+        fig, ax = plt.subplots(figsize=(12, 8))
+        bars = ax.bar(top_species.index, top_species.values,
+                      color=plt.cm.viridis(top_species.values / max(top_species.values)))
+        plt.colorbar(plt.cm.ScalarMappable(cmap='viridis'), ax=ax, label='Count')
+        ax.set_title('top 50 Species with Images')
+        ax.set_xlabel('Species')
+        ax.set_ylabel('Count')
+        plt.xticks(rotation=90)
+        plt.tight_layout()
+        return fig
+
+
+    # Process data once
+    species_with_images = process_species_data(df)
+
+    # Display df 10 first rows
+    if st.checkbox('Display df sample'):
+        st.write('Here is a sample of the dataset:')
+        st.dataframe(df.head(10))
+
+        # df shape
+        st.write('The dataset has', species_with_images.shape[0], 'rows and', species_with_images.shape[1], 'columns.')
+
+    # display top 50 species with images
+    if st.checkbox('Display top 50 species distribution'):
+        fig = create_species_plot(species_with_images)
+        st.pyplot(fig)
+
+    # display distribution per country
+    if st.checkbox('Display distribution per country'):
+        country_df = get_country_data()
+
+        # Calculate countries per species
+        countries_per_species = (country_df.groupby('species')['country']
+                                 .nunique()
+                                 .reset_index(name='num_countries')
+                                 .sort_values('num_countries', ascending=False))
+
+        st.write("Number of countries per species:")
+        st.dataframe(countries_per_species)
+
+        # Create country distribution plot
+        fig, ax = plt.subplots(figsize=(12, 8))
+        country_counts = country_df['country'].value_counts()
+        bars = ax.bar(country_counts.index, country_counts.values,
+                      color=plt.cm.viridis(country_counts.values / max(country_counts.values)))
+        plt.colorbar(plt.cm.ScalarMappable(cmap='viridis'), ax=ax, label='Count')
+        ax.set_title('Distribution per country')
+        ax.set_xlabel('Country')
+        ax.set_ylabel('Count')
+        plt.xticks(rotation=90)
+        plt.tight_layout()
+        st.pyplot(fig)
+
+        st.image('data/countryMap.png', use_column_width=True)
+
+
+    # Cache the species images display
+    @st.cache_data
+    def display_species_grid():
+        species_names = list(class_names.values())  # Convert the class_names dictionary values to a list
+        cols = st.columns(5)
+        for idx, species in enumerate(species_names[:13]):
+            col_idx = idx % 5
+            with cols[col_idx]:
+                st.write(f"**{class_names[idx]}**")
+                species_count = df[df['species'] == class_names[idx]].shape[0]
+                st.write(f"*({species_count} images)*")
+                st.image(f'data/species/{species}.png', use_column_width=True)
+
+
+    # display images of species
+    if st.checkbox('Display species images'):
+        display_species_grid()
 
 if page == pages[3]:
     st.write('Pre Processing')
@@ -397,7 +495,7 @@ if page == pages[3]:
 if page == pages[4]:
     st.write('We created and trained several models to achieve the most reliable results possible. '
              'For some, we built them from scratch, while for others, we used transfer learning techniques. ')
-    st.write('Here is a summary of the results obtained.:')
+    st.write('Here is a summary of the results :')
     results = pd.DataFrame({
         "Model": ["CNN", "MobileNet", "EfficientNetB3", "YoloV8l", "VIT"],
         "F1 score train": [0.98, 0.98, 0.99, 0.94, 1.0],
