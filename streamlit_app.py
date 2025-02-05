@@ -20,6 +20,7 @@ pred_path = 'imag_pred/'
 model_path = 'model/'
 data_path = 'data/'
 dg_path = 'img_datagathering/'
+prep_path = 'img_preprocessing/'
 
 class_names = {0:"Amanita muscaria",
                 1:"Artomyces pyxidatus",
@@ -501,7 +502,171 @@ if page == pages[2]:
         display_species_grid()
 
 if page == pages[3]:
-    st.write('Pre Processing')
+    imagearr = Image.open(prep_path + "arrow.png")
+    imagebox = Image.open(prep_path + "box.png")
+    imageboxt = Image.open(prep_path + "box_train.png")
+    imagerb1 = Image.open(prep_path + "resbox2.png")
+    imagerb2 = Image.open(prep_path + "resbox1.png")
+    imagecrop = Image.open(prep_path + "tocrop.jpg")
+    imagecrop1 = Image.open(prep_path + "crop1.png")
+    imagecrop2 = Image.open(prep_path + "crop2.png")
+    imagecrop3 = Image.open(prep_path + "crop3.png")
+    imagedsetb = Image.open(prep_path + "dsetbase.png")
+    imagedsete = Image.open(prep_path + "dsetequi.png")
+    imagers1 = Image.open(prep_path + "resseg1.png")
+    imagers2 = Image.open(prep_path + "resseg2.png")
+    imageseg = Image.open(prep_path + "seg.png")
+    imagesegt = Image.open(prep_path + "seg_train.png")
+
+    st.markdown("""<h1 style='text-align: center; text-decoration: underline;'>Pre-Processing</h1>""", unsafe_allow_html=True)
+
+    st.markdown("""<h2 style='text-align: center;'>Preparing Images for Models</h2>""", unsafe_allow_html=True)
+
+    st.markdown("""<div style='text-align: center;'>In this stage of the project, the goal was to preprocess image 
+        data efficiently to train our detection and classification models.</div>""", unsafe_allow_html=True) 
+    st.markdown("""<div style='text-align: center;'>We followed several key steps to enhance dataset quality and 
+        optimize model performance.</div>""", unsafe_allow_html=True)
+
+    st.markdown("""<h2 style='text-align: center;'>Bounding Boxes</h2>""", unsafe_allow_html=True)
+    
+    st.write("   ")
+    st.markdown("""<div style='text-align: center;'> 
+        We chose YOLO models for its speed and accuracy and because it is esay to work with it.</div>""", 
+        unsafe_allow_html=True)
+    st.write("   ")
+    st.write("   ")
+
+    col1, Y, col2, Z, col3 = st.columns([3,0.2,1,0.2,6])
+
+    col2.write("   ")
+    col2.write("   ")
+    col2.write("   ")
+    col2.write("   ")
+    col2.write("   ")
+    col2.write("   ")
+    col2.write("   ")
+    col2.write("   ")
+    col2.write("   ")
+
+    col2.image(imagearr, caption="Training Yolo models", use_column_width=True)
+    col1.image(imagebox, caption="boxing with LabelImg", use_column_width=True)
+    col3.image(imageboxt, caption="Prediction of Yolo", use_column_width=True)
+
+    st.markdown("""<div style='text-align: center;'> 
+        We selected 120 images per species  ➡️  manually annotated (LabelImg)  ➡️  training YOLO 
+        models</div>""", unsafe_allow_html=True)
+    st.write("   ")
+    st.write("   ")
+    
+    with st.expander("YoloV8l Performance"):
+        col1, col2 = st.columns([1,1])
+
+        st.image(imagerb1, use_column_width=True)
+        st.image(imagerb2, use_column_width=True)
+ 
+    st.markdown("""<h2 style='text-align: center;'>Image cropping</h2>""", unsafe_allow_html=True)
+
+    st.markdown("""<div style='text-align: center;'>We used the label obtained during the boxing stage
+    to crop the images and keep only the interesting part and reduce the image size.</div>""", unsafe_allow_html=True)
+    st.write("   ")
+    st.write("   ")
+
+    col1, Y, col2, Z, col3 = st.columns([30,1,5,1,6])
+
+    col2.write("   ")
+    col2.write("   ")
+    col2.write("   ")
+    col1.image(imagecrop, caption="Initial image",use_column_width=True) 
+    col2.image(imagearr, caption=" ", use_column_width=True)
+    col2.write("   ")
+    col2.write("   ")
+    col2.write("   ")
+    col2.write("   ")
+    col2.image(imagearr, caption=" ", use_column_width=True)
+    col2.write("   ")
+    col2.write("   ")
+    col2.write("   ")
+    col2.write("   ")
+    col2.write("   ")
+    col2.write("   ")
+    col2.image(imagearr, use_column_width=True)
+    col3.image(imagecrop1, use_column_width=True)
+    col3.write("   ")
+    col3.image(imagecrop2, use_column_width=True)
+    col3.write("   ")
+    col3.image(imagecrop3, caption="3 croped images", use_column_width=True)
+    
+    st.markdown("""<h2 style='text-align: center;'>Ballenced data set</h2>""", unsafe_allow_html=True)
+
+    st.markdown("""<div style='text-align: center;'>A well-balanced dataset prevents the model from favoring
+        overrepresented species.</div>""", unsafe_allow_html=True)
+    st.write("   ")
+    st.write("   ")
+
+    col1, Y, col2, Z, col3 = st.columns([10,0.4,2,0.4,9])
+
+    col2.write("   ")
+    col2.write("   ")
+    col2.write("   ")
+    col2.write("   ")
+    col2.write("   ")
+    col2.write("   ")
+
+    col1.image(imagedsetb, caption="Initial dataset distribution", use_column_width=True)
+    col2.image(imagearr, caption=" ", use_column_width=True)
+    col3.image(imagedsete, caption="Balanced dataset distribution", use_column_width=True)
+
+    st.markdown("""<div style='text-align: center;'>Some species were overrepresented, while others had fewer samples. 
+        </div>""", unsafe_allow_html=True)
+
+    st.markdown("""<h2 style='text-align: center;'>Data augmentation</h2>""", unsafe_allow_html=True)
+
+    st.markdown(
+        """
+        To enhance dataset diversity, we applied various **data augmentation techniques**, including:
+        - **Geometric transformations** (rotations, flips, zooms...)
+        - **Photometric modifications** (contrast, brightness...)
+        - **SMOTE (Synthetic Minority Over-sampling Technique)** for generating additional samples in minority classes.
+        
+        However, excessive augmentation created **storage and training constraints** that required more optimization.
+        """
+    )
+
+    st.markdown("""<h2 style='text-align: center;'>Segmentation</h2>""", unsafe_allow_html=True)
+    st.markdown("""<div style='text-align: center;'>We performed mushroom segmentation to precisely 
+    isolate their shapes and try to apply masks.</div>""", unsafe_allow_html=True)
+
+    st.write("   ")
+    st.write("   ")
+
+    col1, Y, col2, Z, col3 = st.columns([5,0.2,1,0.2,6])
+
+    col2.write("   ")
+    col2.write("   ")
+    col2.write("   ")
+    col2.write("   ")
+    col2.write("   ")
+    col2.write("   ")
+    col2.write("   ")
+    col2.write("   ")
+    col2.write("   ")
+    col2.image(imagearr, caption="Training Yolo models", use_column_width=True)
+    col1.image(imageseg, caption="boxing with LabelImg", use_column_width=True)
+    col3.image(imagesegt, caption="Prediction of Yolo", use_column_width=True)
+
+    st.markdown("""<div style='text-align: center;'> 
+        We selected 120 images per species  ➡️  manually annotated (Labelme)  ➡️  training YOLO 
+        models</div>""", unsafe_allow_html=True)
+    
+    st.write("   ")
+    st.write("   ")
+
+    with st.expander("YoloV8l Performance"):
+
+        col1, col2 = st.columns([1,1])
+
+        st.image(imagers1, use_column_width=True)
+        st.image(imagers2, use_column_width=True)
 
 if page == pages[4]:
     st.write("   ")
