@@ -60,10 +60,11 @@ pages=["Introduction","Data Gathering","Exploration", "Pre Processing", "Modelis
 page=st.sidebar.radio("Go to",pages)
 
 if page == pages[0]:
+    st.write("   ")
+    st.write("   ")
 
     st.markdown("""
-                   
-                   
+                                  
                     As part of the avr24_cds_mushrooms project, we immerse you in the world of **mushrooms.** :herb: These mysterious forest dwellers are fascinating.
                     Their diversity is astounding, ranging from tiny spores invisible to the naked eye to majestic boletes and amanitas.
                     In the kitchen :ramen: mushrooms are treasures of flavors and textures, adding an irresistible touch to many dishes.
@@ -398,7 +399,8 @@ if page == pages[1]:
     st.dataframe(mushroom_data)
 
 if page == pages[2]:
-
+    st.write("   ")
+    st.write("   ")
     st.write('We started by exploring the dataset to understand its structure and characteristics. '
              'We examined the distribution of features, and the characteristics of the images. '
              'This initial exploration helped us identify areas for improvement and guide our data preprocessing efforts.')
@@ -502,6 +504,8 @@ if page == pages[3]:
     st.write('Pre Processing')
 
 if page == pages[4]:
+    st.write("   ")
+    st.write("   ")
     st.write('We created and trained several models to achieve the most reliable results possible. '
              'For some, we built them from scratch, while for others, we used transfer learning techniques. ')
     st.write('Here is a summary of the results :')
@@ -682,7 +686,8 @@ if page == pages[5]:
             ''')
 
 if page == pages[6]:
-
+    st.write("   ")
+    st.write("   ")
     st.markdown("""
                     
                     
