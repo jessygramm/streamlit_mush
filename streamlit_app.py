@@ -43,7 +43,16 @@ st.set_page_config(
     layout="wide",
 )
 
-st.title(":mushroom: Mushroom Prediction :mushroom:")
+# load and cache dataset
+@st.cache_data
+def load_dataset():
+    return pd.read_csv('data/df_16000p_end.csv')
+
+# load df
+df = load_dataset()
+
+#st.title(":mushroom: Mushroom Prediction :mushroom:")
+st.markdown("<h4 style='text-align: center;'> :mushroom: Mushroom Prediction :mushroom:</h4>", unsafe_allow_html=True)
 
 st.sidebar.image('data/mush.png', width=200)
 
