@@ -101,7 +101,7 @@ if page == pages[0]:
                  )
 
 if page == pages[1]:
-
+    
     imageMOL = Image.open(dg_path + "MObsv_logo.png")
     imagepbs = Image.open(dg_path + "pybs4.png")
     imageINT = Image.open(dg_path + "international.jpeg")
@@ -166,23 +166,16 @@ if page == pages[1]:
     st.write("   ")
     st.markdown("""<h2 style='text-align: center;'>What is the structure of the website?</h2>""", unsafe_allow_html=True)
 
-    if "animation1_start" not in st.session_state:
-        st.session_state.animation1_start = False
     if "view1_img" not in st.session_state:
         st.session_state.view1_img = False
 
     with st.expander("Structure", expanded=True):
 
-        colW, col1, colX, col2, colY, col3, colZ = st.columns([1,1,1,1,1,1,1])
+        colW, col1, colX, col2, colY = st.columns([3,1,3,1,3])
 
-        if col1.button("Start"):
-            st.session_state.view1_img = False
-            st.session_state.animation1_start = True
-        if col2.button("Freeze"):
-            st.session_state.animation1_start = False
+        if col1.button("View"):
             st.session_state.view1_img = True
-        if col3.button("Hide"):
-            st.session_state.animation1_start = False
+        if col2.button("Hide"):
             st.session_state.view1_img = False
 
         st.write("   ") 
@@ -190,53 +183,27 @@ if page == pages[1]:
         X, col1, Y, col2, Z = st.columns([1,9,1,4,1])
         image_container1 = col1.empty()
 
-        if st.session_state.animation1_start:
+        if st.session_state.view1_img:
             col2.metric("Mushrooms / page", "12")
+            col2.write("   ")
+            col2.write("   ")
             col2.metric("Total Pages", "44,000")
-            col2.markdown("""<div style="text-align: justify;"> 
-                Instead of retrieving the entire site, which would have been too time-consuming, we 
-                prioritized the most reliable identifications, sorting pages by their confidence degree.<div>
-                """, unsafe_allow_html=True)
-
-            for _ in range(1000):
-                image_container1.image(image1, use_column_width=True)
-                time.sleep(1)
-                image_container1.image(image2, use_column_width=True)
-                time.sleep(1)
-                image_container1.image(image3, use_column_width=True)
-                time.sleep(0.5)
-                image_container1.image(image4, use_column_width=True)
-                time.sleep(1)
-
-                if not st.session_state.animation1_start:
-                    break
-
-            image_container1.empty()
-            col2.empty()
-
-        elif st.session_state.view1_img:
-            col2.metric("Mushrooms / page", "12")
-            col2.metric("Total Pages", "44,000")
+            col2.write("   ")
+            col2.write("   ")
             col2.markdown("""<div style="text-align: justify;"> 
                 Instead of retrieving the entire site, which would have been too time-consuming, we 
                 prioritized the most reliable identifications, sorting pages by their confidence scores.<div>
                 """, unsafe_allow_html=True)
 
-            image_container1.image(image0, use_column_width=True)
+            image_container1.image(image3, use_column_width=True)
 
-        elif not st.session_state.animation1_start and not st.session_state.view1_img:
+        elif not st.session_state.view1_img:
             image_container1.empty()
             col2.empty()
 
     st.write("   ")
     st.markdown("""<h2 style='text-align: center;'>What do we need?</h2>""", unsafe_allow_html=True)
 
-
-
-    if "animation2_start" not in st.session_state:
-        st.session_state.animation2_start = False
-    if "animation3_start" not in st.session_state:
-        st.session_state.animation3_start = False
     if "view2_img" not in st.session_state:
         st.session_state.view2_img = False
 
@@ -244,69 +211,22 @@ if page == pages[1]:
 
         st.markdown("<h4 style='text-align: center;'>Some data hide in 2 levels</h4>", unsafe_allow_html=True)
 
-        V, col1, W, col2, X, col3, Y, col4, Z = st.columns([1,1,1,1,1,1,1,1,1])
+        V, col1, W, col2, X = st.columns([3,1,3,1,3])
 
-        if col1.button("1st level"):
-            st.session_state.animation2_start = True
-            st.session_state.animation3_start = False
-            st.session_state.view2_img = False
-        if col2.button("2nd level"):
-            st.session_state.animation3_start = True
-            st.session_state.animation2_start = False
-            st.session_state.view2_img = False
-        if col3.button("Overview"):
-            st.session_state.animation2_start = False
-            st.session_state.animation3_start = False
+        if col1.button(" View "):
             st.session_state.view2_img = True
-        if col4.button("Hide "):
-            st.session_state.animation2_start = False
-            st.session_state.animation3_start = False
+        if col2.button(" Hide "):
             st.session_state.view2_img = False
 
-        if st.session_state.animation2_start:
-
-            Y, col5, Z = st.columns([1,5,1,])
-            image_container = col5.empty()
-
-            for _ in range(1000):
-                image_container.image(flvl1, use_column_width=True)
-                time.sleep(0.3)
-                image_container.image(flvl2, use_column_width=True)
-                time.sleep(0.3)
-                image_container.image(flvl3, use_column_width=True)
-                time.sleep(0.3)
-                image_container.image(flvl4, use_column_width=True)
-                time.sleep(0.3)
-                image_container.image(flvl5, use_column_width=True)
-                time.sleep(3)
-                if not st.session_state.animation2_start:
-                    break
-            image_container.empty()
-
-        elif st.session_state.animation3_start:
-
-            Y, col6, Z = st.columns([1,18,1,])
-            image_container = col6.empty()
-
-            for _ in range(1000):
-                image_container.image(slvl, use_column_width=True)
-                time.sleep(0.3)
-                image_container.image(slvl1, use_column_width=True)
-                time.sleep(0.3)
-                image_container.image(slvl2, use_column_width=True)
-                time.sleep(0.3)
-                image_container.image(slvl3, use_column_width=True)
-                time.sleep(3)
-                if not st.session_state.animation3_start:
-                    break
-            image_container.empty()
-
-        elif st.session_state.view2_img:
+        if st.session_state.view2_img:
             col7, Z, col8 = st.columns([33.3,1,44])
             with col7:
                 st.image(flvl5, use_column_width=True)
             with col8:
                 st.image(slvl3, use_column_width=True)
+
+    st.write("   ")
+    st.write("   ")
 
     col1, col2= st.columns(2)
     
@@ -324,9 +244,10 @@ if page == pages[1]:
     - precise location
     - confidence degree""")
 
-    col2.markdown("""<div style='text-align: center;'>(🔒 Confidence degrees were only 
+    st.markdown("""<div style='text-align: center;'>(🔒 Confidence degrees were only 
     accessible after logging into a user account)<div>""", unsafe_allow_html=True)
 
+    st.write("   ")
     st.write("   ")
     st.markdown("""<h2 style='text-align: center;'> How did we get it?</h2>""", unsafe_allow_html=True)
     st.write("   ")
@@ -502,6 +423,7 @@ if page == pages[2]:
         display_species_grid()
 
 if page == pages[3]:
+
     imagearr = Image.open(prep_path + "arrow.png")
     imagebox = Image.open(prep_path + "box.png")
     imageboxt = Image.open(prep_path + "box_train.png")
@@ -517,6 +439,10 @@ if page == pages[3]:
     imagers2 = Image.open(prep_path + "resseg2.png")
     imageseg = Image.open(prep_path + "seg.png")
     imagesegt = Image.open(prep_path + "seg_train.png")
+
+    imageseg13 = Image.open(prep_path + "resseg13.png")
+    imagemask = Image.open(prep_path + "maskseg.png")
+    imagers3 = Image.open(prep_path + "ressegmask.png")
 
     st.markdown("""<h1 style='text-align: center; text-decoration: underline;'>Pre-Processing</h1>""", unsafe_allow_html=True)
 
@@ -559,7 +485,6 @@ if page == pages[3]:
     st.write("   ")
     
     with st.expander("YoloV8l Performance"):
-        col1, col2 = st.columns([1,1])
 
         st.image(imagerb1, use_column_width=True)
         st.image(imagerb2, use_column_width=True)
@@ -663,10 +588,35 @@ if page == pages[3]:
 
     with st.expander("YoloV8l Performance"):
 
-        col1, col2 = st.columns([1,1])
-
         st.image(imagers1, use_column_width=True)
         st.image(imagers2, use_column_width=True)
+
+    st.write("   ")
+    st.write("   ")
+
+    st.markdown("""<h2 style='text-align: center;'>Starting modelisation with Yolo</h2>""", unsafe_allow_html=True)
+
+    st.write("   ")
+    st.write("   ")
+
+    col1, Y, col2, Z, col3 = st.columns([5,0.2,2,0.2,5.5])
+
+    col2.write("   ")
+    col2.write("   ")
+    col2.write("   ")
+    col2.write("   ")
+    col2.write("   ")
+    col2.write("   ")
+    col2.write("   ")
+    col2.write("   ")
+    col2.write("   ")
+    col2.image(imagearr, caption="Training Yolo models", use_column_width=True)
+    col3.image(imageseg13, caption="Prediction of Yolo", use_column_width=True)
+    col1.image(imagemask, caption="boxed/masked images", use_column_width=True)
+
+    with st.expander("YoloV8l Performance"):
+
+        st.image(imagers3, use_column_width=True)
 
 if page == pages[4]:
     st.write("   ")
