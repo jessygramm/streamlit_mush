@@ -625,7 +625,7 @@ if page == pages[4]:
              'For some, we built them from scratch, while for others, we used transfer learning techniques. ')
     st.write('Here is a summary of the results :')
     results = pd.DataFrame({
-        "Model": ["CNN", "MobileNet", "EfficientNetB3", "YoloV8l", "VIT"],
+        "Model": ["CNN", "MobileNet", "EfficientNetB7", "YoloV8l", "VIT"],
         "F1 score train": [0.98, 0.98, 0.99, 0.94, 1.0],
         "F1 score test": [0.89, 0.91, 0.93, 0.90, 0.95]
     })
